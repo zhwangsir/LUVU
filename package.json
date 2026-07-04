@@ -1,0 +1,17 @@
+{
+  "name": "luvu-workspace",
+  "private": true,
+  "version": "0.21.0",
+  "type": "module",
+  "description": "LUVU — Electron + Vue 3 硅基生命容器(Live2D + 本地 LLM + RVC + ComfyUI 创造 + 主体性)",
+  "scripts": {
+    "dev": "pnpm build:packages && pnpm -F luvu-electron dev",
+    "build": "pnpm build:packages && pnpm -F luvu-electron build",
+    "build:packages": "pnpm -r --filter './packages/*' build",
+    "typecheck": "pnpm build:packages && pnpm -F luvu-electron typecheck",
+    "test": "pnpm -F luvu-electron test && pnpm -r --filter './packages/*' test --if-present",
+    "package:mac": "pnpm build:packages && pnpm -F luvu-electron package:mac",
+    "package:win": "pnpm build:packages && pnpm -F luvu-electron package:win",
+    "package:linux": "pnpm build:packages && pnpm -F luvu-electron package:linux"
+  }
+}

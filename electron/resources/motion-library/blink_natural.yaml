@@ -1,0 +1,32 @@
+id: blink_natural
+display_name_zh: 自然眨眼
+duration: 0.5
+loop: false
+fps: 60
+tags: [idle, transition]
+description: 单次眨眼，可被 TriggerEngine 当 filler 随机插入
+emotions: [neutral, happy, sad, sleepy]
+contexts: [idle_short, idle_long]
+intensity: light
+required_semantics: [eye_left_open, eye_right_open]
+tracks:
+  - semantic: eye_left_open
+    importance: 1.0
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 1 }
+      - { t: 0.1, v: 0.3 }
+      - { t: 0.15, v: 0 }
+      - { t: 0.2, v: 0.3 }
+      - { t: 0.3, v: 1 }
+      - { t: 0.5, v: 1 }
+  - semantic: eye_right_open
+    importance: 1.0
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 1 }
+      - { t: 0.1, v: 0.3 }
+      - { t: 0.15, v: 0 }
+      - { t: 0.2, v: 0.3 }
+      - { t: 0.3, v: 1 }
+      - { t: 0.5, v: 1 }

@@ -1,0 +1,59 @@
+id: surprise_quick
+display_name_zh: 惊讶反应
+duration: 1.5
+loop: false
+fps: 30
+tags: [reaction, expression]
+description: 快速抬头 + 眼睛大睁 + 嘴张开，瞬间的惊讶
+emotions: [surprise]
+contexts: [reaction]
+intensity: strong
+required_semantics: [eye_left_open, eye_right_open, mouth_open]
+recommended_semantics: [head_pitch, brow_left_y, brow_right_y]
+tracks:
+  - semantic: head_pitch
+    importance: 0.6
+    easing: ease-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.15, v: 8 }
+      - { t: 0.5, v: 4 }
+      - { t: 1.5, v: 0 }
+  - semantic: eye_left_open
+    importance: 1.0
+    easing: ease-out
+    keyframes:
+      - { t: 0,   v: 1 }
+      - { t: 0.1, v: 1.3 }
+      - { t: 0.5, v: 1.2 }
+      - { t: 1.5, v: 1 }
+  - semantic: eye_right_open
+    importance: 1.0
+    easing: ease-out
+    keyframes:
+      - { t: 0,   v: 1 }
+      - { t: 0.1, v: 1.3 }
+      - { t: 0.5, v: 1.2 }
+      - { t: 1.5, v: 1 }
+  - semantic: mouth_open
+    importance: 1.0
+    easing: ease-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.15, v: 0.9 }
+      - { t: 0.6, v: 0.6 }
+      - { t: 1.5, v: 0.1 }
+  - semantic: brow_left_y
+    importance: 0.5
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.1, v: 0.8 }
+      - { t: 0.6, v: 0.4 }
+      - { t: 1.5, v: 0 }
+  - semantic: brow_right_y
+    importance: 0.5
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.1, v: 0.8 }
+      - { t: 0.6, v: 0.4 }
+      - { t: 1.5, v: 0 }

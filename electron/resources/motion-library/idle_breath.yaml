@@ -1,0 +1,37 @@
+id: idle_breath
+display_name_zh: 平静呼吸
+display_name_en: Calm Breath
+duration: 4.0
+loop: true
+fps: 30
+tags: [idle, calm]
+description: 缓慢的呼吸 + 轻微的胸部起伏，无情绪表达，适合 long idle
+emotions: [neutral, sleepy]
+contexts: [idle_long, idle_short]
+intensity: light
+required_semantics: [breath]
+recommended_semantics: [head_pitch, body_pitch]
+tracks:
+  - semantic: breath
+    importance: 1.0
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 2.0, v: 1.0 }
+      - { t: 4.0, v: 0 }
+  - semantic: body_pitch
+    importance: 0.5
+    easing: ease-in-out
+    scale: 0.4
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 2.0, v: 1.5 }
+      - { t: 4.0, v: 0 }
+  - semantic: head_pitch
+    importance: 0.3
+    easing: ease-in-out
+    scale: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 2.0, v: -0.8 }
+      - { t: 4.0, v: 0 }

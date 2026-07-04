@@ -1,0 +1,44 @@
+id: hair_touch
+display_name_zh: 拨弄头发
+duration: 3.0
+loop: false
+fps: 30
+tags: [idle, gesture]
+description: 头略偏 + 偶尔的物理摆动（如果有 hair_front/side），自然 idle
+emotions: [neutral, shy]
+contexts: [idle_long]
+intensity: light
+required_semantics: [head_yaw]
+recommended_semantics: [head_roll, hair_front, hair_side, arm_right]
+tracks:
+  - semantic: head_yaw
+    importance: 0.7
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: 8 }
+      - { t: 2.0, v: 5 }
+      - { t: 3.0, v: 0 }
+  - semantic: head_roll
+    importance: 0.4
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: -5 }
+      - { t: 2.0, v: -3 }
+      - { t: 3.0, v: 0 }
+  - semantic: hair_front
+    importance: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.5, v: 0.5 }
+      - { t: 1.5, v: -0.3 }
+      - { t: 2.5, v: 0.2 }
+      - { t: 3.0, v: 0 }
+  - semantic: arm_right
+    importance: 0.4
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.8, v: 0.6 }
+      - { t: 1.5, v: 0.8 }
+      - { t: 2.5, v: 0.4 }
+      - { t: 3.0, v: 0 }

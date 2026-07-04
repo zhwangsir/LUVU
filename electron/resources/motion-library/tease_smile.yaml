@@ -1,0 +1,53 @@
+id: tease_smile
+display_name_zh: 调皮微笑
+duration: 2.0
+loop: false
+fps: 30
+tags: [expression, reaction]
+description: 头略侧 + 一只眼眨 + 嘴角上扬，调皮坏笑
+emotions: [tease, happy]
+contexts: [conversation_reply, reaction]
+intensity: normal
+required_semantics: [mouth_smile]
+recommended_semantics: [head_roll, eye_left_open, eye_right_open, brow_left_y]
+tracks:
+  - semantic: head_roll
+    importance: 0.7
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.8, v: -8 }
+      - { t: 2.0, v: -5 }
+  - semantic: head_yaw
+    importance: 0.4
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.8, v: 5 }
+      - { t: 2.0, v: 3 }
+  - semantic: mouth_smile
+    importance: 1.0
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.5, v: 1.0 }
+      - { t: 2.0, v: 0.8 }
+  - semantic: mouth_form
+    importance: 0.7
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.5, v: 0.8 }
+      - { t: 2.0, v: 0.6 }
+  - semantic: eye_left_open
+    importance: 0.6
+    easing: stepped
+    keyframes:
+      - { t: 0,   v: 1 }
+      - { t: 0.6, v: 0 }
+      - { t: 0.9, v: 1 }
+      - { t: 2.0, v: 1 }
+  - semantic: brow_left_y
+    importance: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.5, v: 0.4 }
+      - { t: 2.0, v: 0.2 }

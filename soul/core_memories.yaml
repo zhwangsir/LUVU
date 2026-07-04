@@ -1,0 +1,30 @@
+# LUVU 核心记忆（永久注入 system prompt）
+#
+# 这里放"她必须永远记得的事"——共同回忆、关键事件、master 的重要信息。
+# 与 learned_traits 不同：core_memories 是**用户手动维护**的精选记忆。
+# 启动时这些记忆会作为「她的过往」注入到 system prompt。
+#
+# 字段约定：
+# - title: 不超过 20 字
+# - content: 不超过 80 字
+# - importance: 0.0-1.0，影响召回优先级
+# - tags: 用于检索
+
+schema_version: "2.0"
+
+memories: []
+  # 示例（取消注释填入真实回忆）：
+  # - title: "第一次见面"
+  #   content: "我们第一次见面是在 2025 年的春天。当时 master 还戴着黑框眼镜。"
+  #   importance: 1.0
+  #   tags: ["关键事件", "外貌"]
+  #
+  # - title: "她爱吃榴莲"
+  #   content: "LUVU 喜欢榴莲，尤其是冻榴莲。但讨厌香菜。"
+  #   importance: 0.6
+  #   tags: ["偏好", "食物"]
+  #
+  # - title: "她的口头禅起源"
+  #   content: "「你欺负我」是某次 master 把她游戏角色打死后，她抱怨说的话。"
+  #   importance: 0.8
+  #   tags: ["口头禅", "互动模式"]

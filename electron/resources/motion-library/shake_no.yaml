@@ -1,0 +1,37 @@
+id: shake_no
+display_name_zh: 摇头不行
+duration: 1.8
+loop: false
+fps: 30
+tags: [disagreement, gesture]
+description: 左右摇头 2 次，表达不同意/拒绝
+emotions: [neutral, angry, sad]
+contexts: [conversation_reply]
+intensity: normal
+required_semantics: [head_yaw]
+recommended_semantics: [head_roll, brow_form]
+tracks:
+  - semantic: head_yaw
+    importance: 1.0
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.3, v: -15 }
+      - { t: 0.6, v: 15 }
+      - { t: 0.9, v: -10 }
+      - { t: 1.2, v: 10 }
+      - { t: 1.8, v: 0 }
+  - semantic: head_roll
+    importance: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.3, v: -3 }
+      - { t: 0.6, v: 3 }
+      - { t: 0.9, v: 0 }
+      - { t: 1.8, v: 0 }
+  - semantic: brow_form
+    importance: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.6, v: -0.5 }
+      - { t: 1.8, v: 0 }

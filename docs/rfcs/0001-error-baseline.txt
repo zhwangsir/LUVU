@@ -1,0 +1,213 @@
+src/main/ipc/llm.ts(56,11): error TS2379: Argument of type '{ model: string; temperature: number; max_tokens: number | undefined; }' is not assignable to parameter of type 'ChatOptions' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'max_tokens' are incompatible.
+    Type 'number | undefined' is not assignable to type 'number'.
+      Type 'undefined' is not assignable to type 'number'.
+src/main/ipc/motion-factory.ts(55,44): error TS2379: Argument of type '{ summary: ModelMotionSummary; description: string; style: string | undefined; examples: number | undefined; strategy: string | undefined; }' is not assignable to parameter of type 'GenerateParams' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'style' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/ipc/motion-factory.ts(112,61): error TS2379: Argument of type '{ speed_scale: number | undefined; intensity_scale: number | undefined; name_suffix: string | undefined; }' is not assignable to parameter of type 'RenderOptions' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'name_suffix' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/ipc/system.ts(408,28): error TS18048: 'baseUrl' is possibly 'undefined'.
+src/main/ipc/trigger.ts(15,36): error TS2379: Argument of type '{ model_dir: string | undefined; ignore_cooldown: boolean | undefined; }' is not assignable to parameter of type 'DecideOptions' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'model_dir' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/services/attention/scheduler.ts(142,9): error TS2412: Type 'string | undefined' is not assignable to type 'string' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the type of the target.
+  Type 'undefined' is not assignable to type 'string'.
+src/main/services/character-enricher.ts(216,3): error TS2412: Type 'undefined' is not assignable to type 'string' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the type of the target.
+src/main/services/llm/anthropic.ts(84,31): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(input: string | URL | Request, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type '{ method: string; headers: { 'content-type': string; 'x-api-key': string; 'anthropic-version': string; }; body: string; signal: AbortSignal | undefined; }' is not assignable to parameter of type 'RequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'signal' are incompatible.
+        Type 'AbortSignal | undefined' is not assignable to type 'AbortSignal | null'.
+          Type 'undefined' is not assignable to type 'AbortSignal | null'.
+  Overload 2 of 2, '(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type '{ method: string; headers: { 'content-type': string; 'x-api-key': string; 'anthropic-version': string; }; body: string; signal: AbortSignal | undefined; }' is not assignable to parameter of type 'RequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'signal' are incompatible.
+        Type 'AbortSignal | undefined' is not assignable to type 'AbortSignal | null'.
+          Type 'undefined' is not assignable to type 'AbortSignal | null'.
+src/main/services/llm/health-check.ts(50,33): error TS2532: Object is possibly 'undefined'.
+src/main/services/llm/health-check.ts(95,8): error TS2532: Object is possibly 'undefined'.
+src/main/services/llm/health-check.ts(103,8): error TS2532: Object is possibly 'undefined'.
+src/main/services/llm/ollama.ts(31,31): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(input: string | URL | Request, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type '{ method: string; headers: { 'content-type': string; }; body: string; signal: AbortSignal | undefined; }' is not assignable to parameter of type 'RequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'signal' are incompatible.
+        Type 'AbortSignal | undefined' is not assignable to type 'AbortSignal | null'.
+          Type 'undefined' is not assignable to type 'AbortSignal | null'.
+  Overload 2 of 2, '(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type '{ method: string; headers: { 'content-type': string; }; body: string; signal: AbortSignal | undefined; }' is not assignable to parameter of type 'RequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'signal' are incompatible.
+        Type 'AbortSignal | undefined' is not assignable to type 'AbortSignal | null'.
+          Type 'undefined' is not assignable to type 'AbortSignal | null'.
+src/main/services/llm/openai-compat.ts(114,31): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(input: string | URL | Request, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type '{ method: string; headers: { authorization?: string; 'content-type': string; }; body: string; signal: AbortSignal | undefined; }' is not assignable to parameter of type 'RequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'signal' are incompatible.
+        Type 'AbortSignal | undefined' is not assignable to type 'AbortSignal | null'.
+          Type 'undefined' is not assignable to type 'AbortSignal | null'.
+  Overload 2 of 2, '(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type '{ method: string; headers: { authorization?: string; 'content-type': string; }; body: string; signal: AbortSignal | undefined; }' is not assignable to parameter of type 'RequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'signal' are incompatible.
+        Type 'AbortSignal | undefined' is not assignable to type 'AbortSignal | null'.
+          Type 'undefined' is not assignable to type 'AbortSignal | null'.
+src/main/services/llm/openai-compat.ts(246,47): error TS2532: Object is possibly 'undefined'.
+src/main/services/llm/openai-compat.ts(259,29): error TS2532: Object is possibly 'undefined'.
+src/main/services/model-dedup.ts(83,67): error TS2322: Type 'ModelInfo | undefined' is not assignable to type 'ModelInfo'.
+  Type 'undefined' is not assignable to type 'ModelInfo'.
+src/main/services/model-dedup.ts(95,73): error TS2322: Type 'ModelInfo | undefined' is not assignable to type 'ModelInfo'.
+  Type 'undefined' is not assignable to type 'ModelInfo'.
+src/main/services/model-dedup.ts(105,80): error TS2322: Type 'ModelInfo | undefined' is not assignable to type 'ModelInfo'.
+  Type 'undefined' is not assignable to type 'ModelInfo'.
+src/main/services/model-healer.ts(150,3): error TS2375: Type '{ ok: boolean; reason: string | undefined; added: { motions: never[]; expressions: never[]; bound_orphans: { motions: never[]; expressions: never[]; }; }; }' is not assignable to type 'HealResult' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'reason' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/services/model-healer.ts(192,40): error TS2532: Object is possibly 'undefined'.
+src/main/services/model-healer.ts(272,24): error TS2532: Object is possibly 'undefined'.
+src/main/services/model-market.ts(179,33): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/main/services/model-market.ts(202,3): error TS2375: Type '{ ok: true; installed_to: string; detected_name: string; model_file: string | undefined; }' is not assignable to type 'InstallResult' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'model_file' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/services/model-market.ts(206,17): error TS18048: 'modelFile' is possibly 'undefined'.
+src/main/services/model-scanner.ts(324,5): error TS2375: Type '{ has_core: boolean; has_motions: boolean; has_expressions: boolean; has_physics: boolean; motion_count: number; expression_count: number; moc_kb: number; texture_kb: number; complete: boolean; ... 8 more ...; view_label: string; }' is not assignable to type 'ModelMeta' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'reason' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/services/motion-factory/llm-generate.ts(76,29): error TS2379: Argument of type '{ summary: ModelMotionSummary; semantics: SemanticsMap; description: string; style: string | undefined; examples: number | undefined; }' is not assignable to parameter of type 'GenerationContext' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'style' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/services/motion-factory/llm-generate.ts(89,34): error TS2379: Argument of type '{ summary: ModelMotionSummary; semantics: SemanticsMap; description: string; style: string | undefined; examples: number | undefined; }' is not assignable to parameter of type 'GenerationContext' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'style' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/services/motion-factory/llm-generate.ts(248,3): error TS2375: Type '{ name: string; duration: number; loop: boolean; fps: number; tracks: { param: string; keyframes: Array<[number, number]>; }[]; description: string | undefined; }' is not assignable to type 'MotionDraft' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'description' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/services/motion-factory/llm-output-utils.ts(59,3): error TS2375: Type '{ name: string; duration: number; loop: boolean; fps: number; tracks: { param: string; keyframes: Array<[number, number]>; }[]; description: string | undefined; }' is not assignable to type 'MotionDraft' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'description' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/services/motion-factory/parameter-introspector.ts(401,21): error TS2379: Argument of type '{ name: string | undefined; group: string | undefined; }' is not assignable to parameter of type '{ name?: string; group?: string; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'name' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/services/motion-factory/parser.ts(97,26): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/parser.ts(97,40): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/parser.ts(100,17): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/parser.ts(100,31): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/parser.ts(125,56): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+src/main/services/motion-factory/parser.ts(132,63): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+src/main/services/motion-factory/parser.ts(136,63): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+src/main/services/motion-factory/scorer.ts(87,17): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/scorer.ts(87,32): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/scorer.ts(88,17): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/scorer.ts(88,28): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/scorer.ts(90,17): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/scorer.ts(90,32): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/scorer.ts(91,17): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/scorer.ts(91,28): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/scorer.ts(144,19): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/scorer.ts(145,18): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(28,11): error TS18048: 'r' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(29,37): error TS18048: 'r' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(29,39): error TS2339: Property 'value' does not exist on type 'PromiseSettledResult<MotionDraft>'.
+  Property 'value' does not exist on type 'PromiseRejectedResult'.
+src/main/services/motion-factory/strategies/ensemble.ts(30,30): error TS18048: 'r' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(30,32): error TS2339: Property 'value' does not exist on type 'PromiseSettledResult<MotionDraft>'.
+  Property 'value' does not exist on type 'PromiseRejectedResult'.
+src/main/services/motion-factory/strategies/ensemble.ts(30,39): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/main/services/motion-factory/strategies/ensemble.ts(32,52): error TS18048: 'r' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(32,54): error TS2339: Property 'reason' does not exist on type 'PromiseSettledResult<MotionDraft>'.
+  Property 'reason' does not exist on type 'PromiseFulfilledResult<MotionDraft>'.
+src/main/services/motion-factory/strategies/ensemble.ts(50,10): error TS18048: 'best' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(51,7): error TS18048: 'best' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(51,35): error TS18048: 'best' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(51,76): error TS18048: 'best' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(51,96): error TS18048: 'best' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(53,7): error TS18048: 'best' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(53,55): error TS18048: 'best' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(53,75): error TS18048: 'best' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/ensemble.ts(55,12): error TS18048: 'best' is possibly 'undefined'.
+src/main/services/motion-factory/strategies/template-based.ts(70,49): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/main/services/motion-factory/strategies/template-based.ts(71,57): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/main/services/motion-factory/strategies/template-based.ts(73,34): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/main/services/motion-factory/template-renderer.ts(121,3): error TS2322: Type 'ParameterSemantics | undefined' is not assignable to type 'ParameterSemantics | null'.
+  Type 'undefined' is not assignable to type 'ParameterSemantics | null'.
+src/main/services/motion-factory/validator.ts(120,16): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/validator.ts(120,27): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/validator.ts(121,43): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/validator.ts(121,54): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/validator.ts(126,11): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/validator.ts(131,39): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/validator.ts(140,19): error TS2532: Object is possibly 'undefined'.
+src/main/services/motion-factory/validator.ts(141,18): error TS2532: Object is possibly 'undefined'.
+src/main/services/online-store.ts(300,32): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(input: string | URL | Request, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type '{ signal: AbortSignal | undefined; }' is not assignable to parameter of type 'RequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'signal' are incompatible.
+        Type 'AbortSignal | undefined' is not assignable to type 'AbortSignal | null'.
+          Type 'undefined' is not assignable to type 'AbortSignal | null'.
+  Overload 2 of 2, '(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type '{ signal: AbortSignal | undefined; }' is not assignable to parameter of type 'RequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'signal' are incompatible.
+        Type 'AbortSignal | undefined' is not assignable to type 'AbortSignal | null'.
+          Type 'undefined' is not assignable to type 'AbortSignal | null'.
+src/main/services/online-store.ts(364,34): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(input: string | URL | Request, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type '{ signal: AbortSignal | undefined; }' is not assignable to parameter of type 'RequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'signal' are incompatible.
+        Type 'AbortSignal | undefined' is not assignable to type 'AbortSignal | null'.
+          Type 'undefined' is not assignable to type 'AbortSignal | null'.
+  Overload 2 of 2, '(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response>', gave the following error.
+    Argument of type '{ signal: AbortSignal | undefined; }' is not assignable to parameter of type 'RequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'signal' are incompatible.
+        Type 'AbortSignal | undefined' is not assignable to type 'AbortSignal | null'.
+          Type 'undefined' is not assignable to type 'AbortSignal | null'.
+src/main/services/online-store.ts(444,3): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/main/services/paths.ts(73,5): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/main/services/paths.ts(77,3): error TS2322: Type 'LuvuPaths | null' is not assignable to type 'LuvuPaths'.
+  Type 'null' is not assignable to type 'LuvuPaths'.
+src/main/services/perception/bus.ts(66,11): error TS18048: 'ev' is possibly 'undefined'.
+src/main/services/perception/sensors/idle-sensor.ts(71,23): error TS2532: Object is possibly 'undefined'.
+src/main/services/planner/index.ts(177,5): error TS2375: Type '{ t: number; trigger: string; actions: BehaviorAction[]; reasoning: string | undefined; llm_generated: true; }' is not assignable to type 'BehaviorPlan' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'reasoning' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/services/planner/index.ts(342,18): error TS2345: Argument of type '{ type: "play_motion"; source: "library_template" | "engine_entry"; template_id: string | undefined; entry_id: number | undefined; }' is not assignable to parameter of type 'BehaviorAction'.
+  Type '{ type: "play_motion"; source: "library_template" | "engine_entry"; template_id: string | undefined; entry_id: number | undefined; }' is not assignable to type '{ type: "play_motion"; source: "library_template" | "engine_entry"; template_id?: string; entry_id?: number; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+    Types of property 'template_id' are incompatible.
+      Type 'string | undefined' is not assignable to type 'string'.
+        Type 'undefined' is not assignable to type 'string'.
+src/main/services/planner/index.ts(410,3): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/main/services/trigger-engine/engine.ts(98,24): error TS18048: 'picked' is possibly 'undefined'.
+src/main/services/trigger-engine/engine.ts(105,5): error TS2375: Type '{ rule_id: string; template_id: string | undefined; reason: string; }' is not assignable to type 'TriggerDecision' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'template_id' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/windows/main-window.ts(24,33): error TS2379: Argument of type '{ paintWhenInitiallyHidden?: boolean; webPreferences: Electron.WebPreferences; acceptFirstMouse: boolean; alwaysOnTop: boolean; autoHideMenuBar?: boolean; ... 45 more ...; zoomToPageWidth?: boolean; }' is not assignable to parameter of type 'BrowserWindowConstructorOptions' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'type' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/main/windows/shared.ts(25,3): error TS2375: Type '{ frame: false; titleBarStyle: "hidden" | undefined; transparent: true; hasShadow: false; resizable: false; skipTaskbar: true; fullscreenable: false; backgroundColor: string; }' is not assignable to type 'BrowserWindowConstructorOptions' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'titleBarStyle' are incompatible.
+    Type '"hidden" | undefined' is not assignable to type '"hidden" | "default" | "hiddenInset" | "customButtonsOnHover"'.
+      Type 'undefined' is not assignable to type '"hidden" | "default" | "hiddenInset" | "customButtonsOnHover"'.
+[ELIFECYCLE] Command failed with exit code 2.

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LUVU</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --color-bubble: rgba(255, 244, 248, 0.92);
+        --color-bubble-text: #2a1a1a;
+        --color-accent: oklch(78% 0.16 16);
+        --color-accent-text: white;
+        --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.18);
+        --radius-md: 14px;
+        --radius-lg: 22px;
+        --duration-normal: 280ms;
+        --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body,
+      #app {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        background: transparent !important;
+        overflow: hidden;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-app-region: no-drag;
+        font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC',
+          'Helvetica Neue', sans-serif;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+      }
+    </style>
+    <!-- Cubism 4 core 必须在 main.ts 之前加载（由 renderer/public 提供） -->
+    <script src="./live2dcubismcore.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+id: thinking
+display_name_zh: 思考
+duration: 3.5
+loop: true
+fps: 30
+tags: [thinking, gesture]
+description: 头微歪 + 眼神向上飘 + 偶尔眨眼，思考中的表现
+emotions: [neutral]
+contexts: [user_typing, conversation_reply]
+intensity: normal
+required_semantics: [head_roll]
+recommended_semantics: [eye_ball_y, head_yaw]
+tracks:
+  - semantic: head_roll
+    importance: 1.0
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: 10 }
+      - { t: 3.0, v: 12 }
+      - { t: 3.5, v: 0 }
+  - semantic: head_yaw
+    importance: 0.4
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: 5 }
+      - { t: 3.0, v: 7 }
+      - { t: 3.5, v: 0 }
+  - semantic: eye_ball_y
+    importance: 0.6
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: 0.5 }
+      - { t: 2.0, v: 0.7 }
+      - { t: 3.0, v: 0.4 }
+      - { t: 3.5, v: 0 }
+  - semantic: mouth_form
+    importance: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.5, v: -0.2 }
+      - { t: 3.0, v: -0.1 }
+      - { t: 3.5, v: 0 }

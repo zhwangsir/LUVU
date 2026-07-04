@@ -1,0 +1,48 @@
+# --- Node / Vite / Electron ---
+node_modules/
+dist/
+.vite/
+.tsbuildinfo
+*.log
+npm-debug.log*
+pnpm-debug.log*
+electron/out/
+electron/release/
+electron/dist-types/
+
+# --- IDE / Tooling ---
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+.claude/
+
+# --- 旧素材残留 ---
+sprite_sheet_part*.png
+
+# --- 个人/敏感资产（NOT 入仓） ---
+# Live2D 模型库（受 Live2D 商业授权约束，使用者各自获取）
+electron/models-library/
+HuTao-Live2D/
+# Live2D 原始研究 clone（17GB,Live2D Inc 官方仓库镜像,本地学习用）
+Live2d-model-master/
+# Live2D 运行时素材（1.7GB,各 character 立绘 + motion,体积大不入仓）
+public/live2d/
+# 用户私人录音样本
+example_voice/
+
+# --- 备份残留 ---
+*.bak
+
+# --- Python sidecar venv ---
+sidecar/**/.venv/
+sidecar/**/__pycache__/
+sidecar/**/*.pyc
+
+# --- 用户数据（运行时）---
+*.db
+*.sqlite
+*.sqlite3
+.luvu/
+tmp/

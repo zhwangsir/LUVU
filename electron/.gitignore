@@ -1,0 +1,12 @@
+out/
+dist/
+dist-types/
+node_modules/
+release/
+*.log
+.DS_Store
+
+# E2E
+playwright-report/
+test-results/
+playwright/.cache/

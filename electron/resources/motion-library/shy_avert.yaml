@@ -1,0 +1,46 @@
+id: shy_avert
+display_name_zh: 害羞撇头
+duration: 2.0
+loop: false
+fps: 30
+tags: [reaction, expression]
+description: 头侧偏 + 视线移开 + 脸颊红润；适合被夸奖/被告白时的反应
+emotions: [shy, happy]
+contexts: [conversation_reply, reaction]
+intensity: normal
+required_semantics: [head_yaw, cheek]
+recommended_semantics: [eye_ball_x, eye_ball_y, mouth_form]
+tracks:
+  - semantic: head_yaw
+    importance: 0.9
+    easing: ease-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.8, v: -12 }
+      - { t: 2.0, v: -8 }
+  - semantic: head_pitch
+    importance: 0.5
+    easing: ease-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.8, v: -5 }
+      - { t: 2.0, v: -3 }
+  - semantic: cheek
+    importance: 1.0
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.5, v: 1.0 }
+      - { t: 2.0, v: 0.8 }
+  - semantic: eye_ball_x
+    importance: 0.5
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.8, v: 0.6 }
+      - { t: 2.0, v: 0.3 }
+  - semantic: mouth_form
+    importance: 0.4
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.8, v: 0.5 }
+      - { t: 2.0, v: 0.3 }

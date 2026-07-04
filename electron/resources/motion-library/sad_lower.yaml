@@ -1,0 +1,52 @@
+id: sad_lower
+display_name_zh: 难过低头
+duration: 3.0
+loop: false
+fps: 30
+tags: [reaction, expression, calm]
+description: 头低下 + 眉毛下垂 + 嘴角下拉，表达难过/失落
+emotions: [sad]
+contexts: [conversation_reply, reaction]
+intensity: normal
+required_semantics: [head_pitch]
+recommended_semantics: [brow_left_y, brow_right_y, mouth_form, eye_left_open, eye_right_open]
+tracks:
+  - semantic: head_pitch
+    importance: 1.0
+    easing: ease-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.5, v: -15 }
+      - { t: 3.0, v: -12 }
+  - semantic: brow_left_y
+    importance: 0.7
+    easing: ease-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: -0.7 }
+      - { t: 3.0, v: -0.6 }
+  - semantic: brow_right_y
+    importance: 0.7
+    easing: ease-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: -0.7 }
+      - { t: 3.0, v: -0.6 }
+  - semantic: mouth_form
+    importance: 0.6
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: -0.6 }
+      - { t: 3.0, v: -0.5 }
+  - semantic: eye_left_open
+    importance: 0.4
+    keyframes:
+      - { t: 0,   v: 1 }
+      - { t: 1.5, v: 0.6 }
+      - { t: 3.0, v: 0.5 }
+  - semantic: eye_right_open
+    importance: 0.4
+    keyframes:
+      - { t: 0,   v: 1 }
+      - { t: 1.5, v: 0.6 }
+      - { t: 3.0, v: 0.5 }

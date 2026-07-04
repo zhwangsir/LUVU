@@ -1,0 +1,38 @@
+id: look_around
+display_name_zh: 环顾四周
+duration: 4.0
+loop: false
+fps: 30
+tags: [idle, gesture]
+description: 头部慢慢左右转动，眼神跟随；适合 long idle 增加生动感
+emotions: [neutral]
+contexts: [idle_long]
+intensity: normal
+required_semantics: [head_yaw]
+recommended_semantics: [eye_ball_x]
+tracks:
+  - semantic: head_yaw
+    importance: 1.0
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: 15 }
+      - { t: 2.0, v: -10 }
+      - { t: 3.0, v: 5 }
+      - { t: 4.0, v: 0 }
+  - semantic: eye_ball_x
+    importance: 0.7
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: 0.8 }
+      - { t: 2.0, v: -0.6 }
+      - { t: 3.0, v: 0.3 }
+      - { t: 4.0, v: 0 }
+  - semantic: head_pitch
+    importance: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.5, v: 3 }
+      - { t: 3.0, v: -2 }
+      - { t: 4.0, v: 0 }

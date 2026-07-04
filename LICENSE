@@ -1,0 +1,37 @@
+MIT License
+
+Copyright (c) 2026 wangzhenyu
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## 第三方资产声明
+
+- **Live2D 模型**：本仓库不包含 Live2D 角色模型（`HuTao-Live2D/` 已被 .gitignore）。
+  使用者需自行获取符合 Live2D Cubism 授权条款的模型文件。
+  Live2D Cubism Core 运行时受 [Live2D 专属授权](https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html) 约束，年收益 < $10M（个人/小团队）可免费使用。
+
+- **Cubism 4 Web 运行时**：`live2dcubismcore.min.js` 来自 Live2D 官方，
+  本仓库使用 CDN 引用，未直接分发。
+
+- **声音样本**：用户私人录音，`example_voice/` 不入仓。
+
+- **Hu Tao（胡桃）**：《原神》角色，© miHoYo / HoYoverse。
+  本项目仅做本地个人使用，不分发角色资产。

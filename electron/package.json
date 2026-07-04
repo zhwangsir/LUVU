@@ -1,0 +1,144 @@
+{
+  "name": "luvu-electron",
+  "version": "0.21.0",
+  "private": true,
+  "type": "module",
+  "description": "LUVU v0.16 — Live2D 模型完整度工坊 (LLM motion + 8 expression + 物理预设 + 参数检测 + 健康仪表盘)",
+  "main": "out/main/index.js",
+  "author": "LUVU for Master",
+  "scripts": {
+    "dev": "electron-vite dev --watch",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "typecheck": "tsc -p tsconfig.node.json --noEmit && vue-tsc -p tsconfig.web.json --noEmit",
+    "start": "electron-vite preview",
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "package": "pnpm build && electron-builder --dir",
+    "package:mac": "pnpm build && electron-builder --mac",
+    "package:win": "pnpm build && electron-builder --win",
+    "package:linux": "pnpm build && electron-builder --linux",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "e2e": "pnpm build && playwright test",
+    "e2e:ui": "pnpm build && playwright test --ui"
+  },
+  "dependencies": {
+    "@electron-toolkit/preload": "^3.0.1",
+    "@electron-toolkit/utils": "^3.0.0",
+    "@nut-tree-fork/nut-js": "^4.2.6",
+    "adm-zip": "^0.5.16",
+    "better-sqlite3": "^12.10.0",
+    "docx": "^9.7.1",
+    "electron-click-drag-plugin": "^2.0.2",
+    "electron-log": "^5.4.4",
+    "exceljs": "^4.4.0",
+    "js-yaml": "^4.1.0",
+    "mitt": "^3.0.1",
+    "pinia": "^2.2.6",
+    "pixi-live2d-display": "^0.4.0",
+    "pixi.js": "^6.5.10",
+    "pptxgenjs": "^4.0.1",
+    "vue": "^3.5.13",
+    "wlipsync": "^1.3.0"
+  },
+  "devDependencies": {
+    "@electron-toolkit/eslint-config-ts": "^2.0.0",
+    "@electron/rebuild": "3.6.1",
+    "@playwright/test": "^1.60.0",
+    "@luvu/motion-factory": "workspace:*",
+    "@luvu/soul-loader": "workspace:*",
+    "@types/adm-zip": "^0.5.7",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.10.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitest/coverage-v8": "^2.1.9",
+    "@vue/tsconfig": "^0.5.1",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.9",
+    "vue-tsc": "^2.1.10"
+  },
+  "build": {
+    "appId": "moe.luvu.app",
+    "productName": "LUVU",
+    "asar": true,
+    "asarUnpack": [
+      "**/node_modules/better-sqlite3/**",
+      "**/node_modules/electron-click-drag-plugin/**"
+    ],
+    "directories": {
+      "output": "release/${version}",
+      "buildResources": "build"
+    },
+    "files": [
+      "out/**/*",
+      "resources/**/*",
+      "package.json",
+      "!**/*.map"
+    ],
+    "extraResources": [
+      {
+        "from": "../soul",
+        "to": "soul",
+        "filter": [
+          "**/*.yaml",
+          "**/*.yml"
+        ]
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.entertainment",
+      "icon": "build/icon.icns",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "extendInfo": {
+        "LSUIElement": true,
+        "NSMicrophoneUsageDescription": "LUVU 在你启用语音输入时使用麦克风。",
+        "NSAppleEventsUsageDescription": "LUVU 在你授权后可代你执行桌面自动化任务。"
+      }
+    },
+    "win": {
+      "icon": "build/icon.png",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "icon": "build/icon.png",
+      "category": "Utility",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

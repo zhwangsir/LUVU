@@ -1,0 +1,431 @@
+{
+  "base_url": "https://cubism.live2d.com/sample-data/bin/",
+  "model_count": 30,
+  "failed": [],
+  "models": [
+    {
+      "id": "chitose_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "27.7 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/chitose/chitose.zip",
+      "zip_path": "public/live2d/samples/_zips/chitose.zip",
+      "extract_dir": "public/live2d/samples/chitose_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "cubism4_hiyori_pro",
+      "lang": "zh",
+      "date": "2023-03-08",
+      "size": "16.7 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/hiyori_movie/hiyori_movie_pro_zh.zip",
+      "zip_path": "public/live2d/samples/_zips/hiyori_movie_pro_zh.zip",
+      "extract_dir": "public/live2d/samples/cubism4_hiyori_pro",
+      "all_langs": [
+        "ja",
+        "en",
+        "zh",
+        "ko"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "cubism4_mark_pro",
+      "lang": "zh",
+      "date": "2021-06-10",
+      "size": "15.9 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/mark_movie/mark_movie_pro_zh.zip",
+      "zip_path": "public/live2d/samples/_zips/mark_movie_pro_zh.zip",
+      "extract_dir": "public/live2d/samples/cubism4_mark_pro",
+      "all_langs": [
+        "ja",
+        "en",
+        "zh",
+        "ko"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "epsilon_free",
+      "lang": "ja",
+      "date": "2025-08-01",
+      "size": "15.9 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/epsilon/Epsilon_free.zip",
+      "zip_path": "public/live2d/samples/_zips/Epsilon_free.zip",
+      "extract_dir": "public/live2d/samples/epsilon_free",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "epsilon_pro",
+      "lang": "ja",
+      "date": "2025-08-01",
+      "size": "14.4 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/epsilon/Epsilon.zip",
+      "zip_path": "public/live2d/samples/_zips/Epsilon.zip",
+      "extract_dir": "public/live2d/samples/epsilon_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "gantzert_felixander_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "50.7 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/Gantzert_Felixander/Gantzert_Felixander.zip",
+      "zip_path": "public/live2d/samples/_zips/Gantzert_Felixander.zip",
+      "extract_dir": "public/live2d/samples/gantzert_felixander_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "haru_greeter_pro",
+      "lang": "ja",
+      "date": "2023-06-22",
+      "size": "40.1 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/haru/haru_greeter_pro_jp.zip",
+      "zip_path": "public/live2d/samples/_zips/haru_greeter_pro_jp.zip",
+      "extract_dir": "public/live2d/samples/haru_greeter_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "haru_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "14.9 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/haru/haru.zip",
+      "zip_path": "public/live2d/samples/_zips/haru.zip",
+      "extract_dir": "public/live2d/samples/haru_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "hibiki_free",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "8.06 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/hibiki/hibiki.zip",
+      "zip_path": "public/live2d/samples/_zips/hibiki.zip",
+      "extract_dir": "public/live2d/samples/hibiki_free",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "hiyori_free",
+      "lang": "zh",
+      "date": "2021-06-10",
+      "size": "12.4 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/hiyori_free/hiyori_free_zh.zip",
+      "zip_path": "public/live2d/samples/_zips/hiyori_free_zh.zip",
+      "extract_dir": "public/live2d/samples/hiyori_free",
+      "all_langs": [
+        "ja",
+        "en",
+        "zh",
+        "ko"
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "hiyori_pro",
+      "lang": "zh",
+      "date": "2023-03-08",
+      "size": "31.8 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/hiyori_pro/hiyori_pro_zh.zip",
+      "zip_path": "public/live2d/samples/_zips/hiyori_pro_zh.zip",
+      "extract_dir": "public/live2d/samples/hiyori_pro",
+      "all_langs": [
+        "ja",
+        "en",
+        "zh",
+        "ko"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "izumi_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "128 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/izumi/izumi.zip",
+      "zip_path": "public/live2d/samples/_zips/izumi.zip",
+      "extract_dir": "public/live2d/samples/izumi_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "kei",
+      "lang": "zh",
+      "date": "2023-10-17",
+      "size": "18.4 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/kei/kei_zh.zip",
+      "zip_path": "public/live2d/samples/_zips/kei_zh.zip",
+      "extract_dir": "public/live2d/samples/kei",
+      "all_langs": [
+        "ja",
+        "en",
+        "zh",
+        "ko"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "koharu_haruto_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "22.3 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/SDcharacter/koharu_haruto.zip",
+      "zip_path": "public/live2d/samples/_zips/koharu_haruto.zip",
+      "extract_dir": "public/live2d/samples/koharu_haruto_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "mao_pro",
+      "lang": "zh",
+      "date": "2025-03-14",
+      "size": "77.2 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/mao_pro/mao_pro_zh.zip",
+      "zip_path": "public/live2d/samples/_zips/mao_pro_zh.zip",
+      "extract_dir": "public/live2d/samples/mao_pro",
+      "all_langs": [
+        "ja",
+        "en",
+        "zh",
+        "ko"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "mark_free",
+      "lang": "zh",
+      "date": "2021-06-10",
+      "size": "1.9 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/mark_free/mark_free_zh.zip",
+      "zip_path": "public/live2d/samples/_zips/mark_free_zh.zip",
+      "extract_dir": "public/live2d/samples/mark_free",
+      "all_langs": [
+        "ja",
+        "en",
+        "zh",
+        "ko"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "miara_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "38.3 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/miara/miara_pro_jp.zip",
+      "zip_path": "public/live2d/samples/_zips/miara_pro_jp.zip",
+      "extract_dir": "public/live2d/samples/miara_pro",
+      "all_langs": [
+        "ja",
+        "en"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "miku_cubism2_free",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "20.2 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/miku/cubism2/miku.zip",
+      "zip_path": "public/live2d/samples/_zips/miku.zip",
+      "extract_dir": "public/live2d/samples/miku_cubism2_free",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "miku_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "21.3 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/miku/miku_pro_jp.zip",
+      "zip_path": "public/live2d/samples/_zips/miku_pro_jp.zip",
+      "extract_dir": "public/live2d/samples/miku_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "natori_pro",
+      "lang": "zh",
+      "date": "2021-06-10",
+      "size": "24.8 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/natori/natori_pro_zh.zip",
+      "zip_path": "public/live2d/samples/_zips/natori_pro_zh.zip",
+      "extract_dir": "public/live2d/samples/natori_pro",
+      "all_langs": [
+        "ja",
+        "en",
+        "zh",
+        "ko"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "nito_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "37.3 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/nito/nito.zip",
+      "zip_path": "public/live2d/samples/_zips/nito.zip",
+      "extract_dir": "public/live2d/samples/nito_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "param_ctrl_pro",
+      "lang": "zh",
+      "date": "2025-03-14",
+      "size": "14.7 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/param_ctrl_pro/param_ctrl_pro_zh.zip",
+      "zip_path": "public/live2d/samples/_zips/param_ctrl_pro_zh.zip",
+      "extract_dir": "public/live2d/samples/param_ctrl_pro",
+      "all_langs": [
+        "ja",
+        "en",
+        "zh",
+        "ko"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "ren_pro",
+      "lang": "zh",
+      "date": "2026-01-20",
+      "size": "44.5 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/ren_pro/ren_pro_zh.zip",
+      "zip_path": "public/live2d/samples/_zips/ren_pro_zh.zip",
+      "extract_dir": "public/live2d/samples/ren_pro",
+      "all_langs": [
+        "ja",
+        "en",
+        "zh",
+        "ko"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "rice_pro",
+      "lang": "zh",
+      "date": "2021-06-10",
+      "size": "12.5 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/rice_pro/rice_pro_zh.zip",
+      "zip_path": "public/live2d/samples/_zips/rice_pro_zh.zip",
+      "extract_dir": "public/live2d/samples/rice_pro",
+      "all_langs": [
+        "ja",
+        "en",
+        "zh",
+        "ko"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "shizuku_pro",
+      "lang": "ja",
+      "date": "2020-10-29",
+      "size": "43.3 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/shizuku/shizuku.zip",
+      "zip_path": "public/live2d/samples/_zips/shizuku.zip",
+      "extract_dir": "public/live2d/samples/shizuku_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "simple_free",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "882 KB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/simple/simple.zip",
+      "zip_path": "public/live2d/samples/_zips/simple.zip",
+      "extract_dir": "public/live2d/samples/simple_free",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "tororohijiki_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "11.2 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/tororohijiki/tororo_hijiki.zip",
+      "zip_path": "public/live2d/samples/_zips/tororo_hijiki.zip",
+      "extract_dir": "public/live2d/samples/tororohijiki_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "tsumiki_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "11.5 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/collaboration01/tsumiki.zip",
+      "zip_path": "public/live2d/samples/_zips/tsumiki.zip",
+      "extract_dir": "public/live2d/samples/tsumiki_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "unitychan_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "22.4 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/unitychan/Unitychan.zip",
+      "zip_path": "public/live2d/samples/_zips/Unitychan.zip",
+      "extract_dir": "public/live2d/samples/unitychan_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    },
+    {
+      "id": "wanko_pro",
+      "lang": "ja",
+      "date": "2020-09-17",
+      "size": "4.57 MB",
+      "source_url": "https://cubism.live2d.com/sample-data/bin/wanko/wanko.zip",
+      "zip_path": "public/live2d/samples/_zips/wanko.zip",
+      "extract_dir": "public/live2d/samples/wanko_pro",
+      "all_langs": [
+        "ja"
+      ],
+      "status": "ok_cached"
+    }
+  ]
+}

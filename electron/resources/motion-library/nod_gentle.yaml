@@ -1,0 +1,36 @@
+id: nod_gentle
+display_name_zh: 温柔点头
+duration: 2.5
+loop: false
+fps: 30
+tags: [agreement, calm, conversational]
+description: 缓慢柔和地点 2 下头，眼神略微下垂；适合表达「我懂了」「好的」
+emotions: [neutral, happy]
+contexts: [conversation_reply, listening]
+intensity: normal
+required_semantics: [head_pitch]
+recommended_semantics: [eye_ball_y]
+tracks:
+  - semantic: head_pitch
+    importance: 1.0
+    easing: ease-in-out
+    scale: 1.0
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.6, v: -8 }
+      - { t: 1.2, v: 0 }
+      - { t: 1.8, v: -4 }
+      - { t: 2.5, v: 0 }
+  - semantic: eye_ball_y
+    importance: 0.4
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.6, v: -0.3 }
+      - { t: 1.2, v: 0 }
+  - semantic: brow_form
+    importance: 0.2
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.5, v: 0.3 }
+      - { t: 1.2, v: 0 }

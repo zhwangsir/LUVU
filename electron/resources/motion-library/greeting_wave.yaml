@@ -1,0 +1,50 @@
+id: greeting_wave
+display_name_zh: 招手问候
+duration: 2.5
+loop: false
+fps: 30
+tags: [greeting, gesture, energetic]
+description: 抬头微笑 + 右手挥动（需要 arm_right 参数）
+emotions: [happy, neutral]
+contexts: [greeting]
+intensity: normal
+required_semantics: [head_pitch, mouth_smile]
+recommended_semantics: [arm_right, brow_left_y, brow_right_y]
+tracks:
+  - semantic: head_pitch
+    importance: 0.7
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.5, v: 5 }
+      - { t: 2.0, v: 4 }
+      - { t: 2.5, v: 0 }
+  - semantic: mouth_smile
+    importance: 1.0
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.5, v: 1.0 }
+      - { t: 2.5, v: 0.5 }
+  - semantic: arm_right
+    importance: 0.5
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.3, v: 0.7 }
+      - { t: 0.7, v: 1.0 }
+      - { t: 1.1, v: 0.7 }
+      - { t: 1.5, v: 1.0 }
+      - { t: 2.5, v: 0 }
+  - semantic: brow_left_y
+    importance: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.5, v: 0.4 }
+      - { t: 2.5, v: 0 }
+  - semantic: brow_right_y
+    importance: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 0.5, v: 0.4 }
+      - { t: 2.5, v: 0 }

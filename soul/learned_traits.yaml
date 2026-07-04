@@ -1,0 +1,25 @@
+# LUVU 学习到的特质（系统自动写入，不要手改）
+#
+# 这是她"越用越懂你"的产物。系统通过观察对话、屏幕、行为模式，
+# 周期性地把发现写入此文件。M6 启用自学习时这里会丰富起来。
+#
+# 启动时这些 traits 会注入 system prompt 的"她对 master 的了解"部分。
+
+schema_version: "2.0"
+
+# master 的高频关键词（出现频率 + 最近一次提及时间）
+observed_keywords: []
+
+# master 的日常作息（推断）
+master_routines:
+  active_hours: null             # 例 "09:00-02:00"
+  most_used_apps: []
+  typical_evening_activity: null
+
+# 偏好漂移（关于 master 喜好的推测）
+preference_drift: {}
+
+# 元数据
+meta:
+  last_updated: null
+  observation_count: 0

@@ -1,0 +1,58 @@
+id: sleepy_yawn
+display_name_zh: 困倦打哈欠
+duration: 4.0
+loop: false
+fps: 30
+tags: [reaction, expression, calm]
+description: 嘴大张 + 眼睛眯起 + 头略后仰 + 慢恢复
+emotions: [sleepy]
+contexts: [idle_long, reaction]
+intensity: strong
+required_semantics: [mouth_open, eye_left_open, eye_right_open]
+recommended_semantics: [head_pitch, brow_left_y, brow_right_y]
+tracks:
+  - semantic: mouth_open
+    importance: 1.0
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.2, v: 1.0 }
+      - { t: 2.0, v: 0.9 }
+      - { t: 3.0, v: 0.2 }
+      - { t: 4.0, v: 0 }
+  - semantic: eye_left_open
+    importance: 0.9
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 1 }
+      - { t: 1.2, v: 0.2 }
+      - { t: 2.0, v: 0.3 }
+      - { t: 4.0, v: 0.7 }
+  - semantic: eye_right_open
+    importance: 0.9
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 1 }
+      - { t: 1.2, v: 0.2 }
+      - { t: 2.0, v: 0.3 }
+      - { t: 4.0, v: 0.7 }
+  - semantic: head_pitch
+    importance: 0.5
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.2, v: 5 }
+      - { t: 2.5, v: 3 }
+      - { t: 4.0, v: 0 }
+  - semantic: brow_left_y
+    importance: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: -0.5 }
+      - { t: 4.0, v: 0 }
+  - semantic: brow_right_y
+    importance: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: -0.5 }
+      - { t: 4.0, v: 0 }

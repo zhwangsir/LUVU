@@ -1,0 +1,303 @@
+/* LUVU renderer global styles — v0.13 UX pass */
+
+:root {
+  color-scheme: light dark;
+
+  /* 色彩 — 浅色 (默认) */
+  --color-bg: transparent;
+  --color-bubble: oklch(98% 0.012 25 / 0.92);
+  --color-bubble-text: oklch(18% 0.02 25);
+  --color-bubble-border: oklch(95% 0.015 25 / 0.6);
+  --color-bubble-surface: oklch(96% 0.012 25 / 0.7);
+  --color-bubble-surface-hover: oklch(93% 0.015 25 / 0.85);
+  --color-accent: oklch(72% 0.18 18);
+  --color-accent-hover: oklch(67% 0.2 18);
+  --color-accent-soft: oklch(85% 0.1 25 / 0.85);
+  --color-accent-text: oklch(98% 0 0);
+  --color-danger: oklch(60% 0.22 25);
+  --color-danger-soft: oklch(94% 0.06 25 / 0.7);
+  --color-success: oklch(58% 0.18 145);
+  --color-warn: oklch(65% 0.18 80);
+  --color-muted: oklch(55% 0.015 25);
+  --color-divider: oklch(85% 0.012 25 / 0.4);
+
+  /* 字号 */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-lg: 16px;
+  --text-xl: 19px;
+
+  /* 间距 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+
+  /* 半径 */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  /* 阴影 — 多层次更柔 */
+  --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.06), 0 2px 6px oklch(0% 0 0 / 0.08);
+  --shadow-md: 0 2px 4px oklch(0% 0 0 / 0.06), 0 8px 24px oklch(0% 0 0 / 0.12);
+  --shadow-lg: 0 4px 8px oklch(0% 0 0 / 0.08), 0 16px 48px oklch(0% 0 0 / 0.18);
+  --shadow-focus: 0 0 0 3px oklch(72% 0.18 18 / 0.25);
+
+  /* 动效 — 物理感 */
+  --duration-fast: 150ms;
+  --duration-normal: 260ms;
+  --duration-slow: 420ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 暗色主题 token 单一定义 — 共享给以下两种触发方式:
+   1. @media (prefers-color-scheme: dark) — auto 模式跟随系统
+   2. :root[data-theme="dark"] — 用户手动 override
+*/
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bubble: oklch(22% 0.012 25 / 0.92);
+    --color-bubble-text: oklch(94% 0.012 25);
+    --color-bubble-border: oklch(38% 0.015 25 / 0.6);
+    --color-bubble-surface: oklch(28% 0.012 25 / 0.7);
+    --color-bubble-surface-hover: oklch(34% 0.015 25 / 0.85);
+    --color-accent: oklch(76% 0.16 18);
+    --color-accent-hover: oklch(82% 0.18 18);
+    --color-accent-soft: oklch(40% 0.12 25 / 0.55);
+    --color-accent-text: oklch(15% 0.01 25);
+    --color-danger: oklch(72% 0.2 25);
+    --color-danger-soft: oklch(35% 0.1 25 / 0.5);
+    --color-success: oklch(72% 0.18 145);
+    --color-warn: oklch(76% 0.16 80);
+    --color-muted: oklch(65% 0.015 25);
+    --color-divider: oklch(38% 0.012 25 / 0.4);
+
+    --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.3), 0 2px 6px oklch(0% 0 0 / 0.25);
+    --shadow-md: 0 2px 4px oklch(0% 0 0 / 0.3), 0 8px 24px oklch(0% 0 0 / 0.35);
+    --shadow-lg: 0 4px 8px oklch(0% 0 0 / 0.35), 0 16px 48px oklch(0% 0 0 / 0.45);
+  }
+}
+/* 用户手动强制 light — 让浏览器原生 UI（滚动条、input）同步深浅 */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+/* 用户手动强制 dark — 不论系统设置 */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bubble: oklch(22% 0.012 25 / 0.92);
+  --color-bubble-text: oklch(94% 0.012 25);
+  --color-bubble-border: oklch(38% 0.015 25 / 0.6);
+  --color-bubble-surface: oklch(28% 0.012 25 / 0.7);
+  --color-bubble-surface-hover: oklch(34% 0.015 25 / 0.85);
+  --color-accent: oklch(76% 0.16 18);
+  --color-accent-hover: oklch(82% 0.18 18);
+  --color-accent-soft: oklch(40% 0.12 25 / 0.55);
+  --color-accent-text: oklch(15% 0.01 25);
+  --color-danger: oklch(72% 0.2 25);
+  --color-danger-soft: oklch(35% 0.1 25 / 0.5);
+  --color-success: oklch(72% 0.18 145);
+  --color-warn: oklch(76% 0.16 80);
+  --color-muted: oklch(65% 0.015 25);
+  --color-divider: oklch(38% 0.012 25 / 0.4);
+
+  --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.3), 0 2px 6px oklch(0% 0 0 / 0.25);
+  --shadow-md: 0 2px 4px oklch(0% 0 0 / 0.3), 0 8px 24px oklch(0% 0 0 / 0.35);
+  --shadow-lg: 0 4px 8px oklch(0% 0 0 / 0.35), 0 16px 48px oklch(0% 0 0 / 0.45);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 输入区允许选 / 文字内容允许选 */
+input,
+textarea,
+[contenteditable],
+.text,
+.msg,
+.code,
+pre,
+code {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent !important;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue',
+    sans-serif;
+  color: var(--color-bubble-text);
+  font-feature-settings: 'tnum', 'cv11';
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 透明窗口里 focus 视觉清晰但不刺眼 */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* 鼠标点击时移除 outline 噪音，键盘 tab 时保留 */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  /* 微交互：所有按钮按下时轻微缩小，物理反馈 */
+  transition: transform var(--duration-fast) var(--ease-out-back),
+    background-color var(--duration-fast),
+    color var(--duration-fast),
+    box-shadow var(--duration-fast);
+}
+button:active:not(:disabled) {
+  transform: scale(0.94);
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* 输入框统一 focus 状态 */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+/* 自定义滚动条 — 不打扰但可见 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(75% 0.012 25 / 0.35);
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(60% 0.012 25 / 0.55);
+  background-clip: content-box;
+  border: 2px solid transparent;
+}
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background: oklch(55% 0.012 25 / 0.4);
+    background-clip: content-box;
+    border: 2px solid transparent;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(70% 0.012 25 / 0.6);
+    background-clip: content-box;
+    border: 2px solid transparent;
+  }
+}
+
+/* 文字选中颜色 */
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-bubble-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* ============== v0.17 全局 UI 缩放 ==============
+ * Cmd/Ctrl + = / - / 0 控制 :root 的 --ui-scale (0.7~1.6)
+ * 用 transform: scale 不用 zoom — Chromium 上不会破坏 fixed children 的事件路径。
+ * transform 不影响 layout box，hit-test 自动按 transformed bounding box 计算，
+ * 所以 panel 关闭按钮 / 外部遮罩点击都正常。
+ *
+ * 应用范围：所有 dialog / panel 的根容器 — 立绘 / 背景 / 粒子不缩。
+ * 全局 selectors（不在 Vue scoped 内，跨组件生效）。
+ * ============================================ */
+.fp-panel,
+.ctx-menu,
+.lightbox,
+.overlay > .card,
+.overlay > .panel {
+  transform: scale(var(--ui-scale, 1));
+  transform-origin: center center;
+  transition: transform 120ms ease;
+}
+/* .bubble 不在这里 — 它有自己的 translateX(-50%) 定位需求，
+   scale 由 DialogBubble.vue scoped style 自己合写（避免 specificity 战 + transform 覆盖） */
+
+
+/* R80: 全局 .input-with-toggle 复合输入 — Settings/Onboarding/RVC/TTS API key 显隐共用
+ *
+ * ⚠ specificity 注意 (reviewer R86 MED):
+ * 子选择器 .input-with-toggle > input 是 0-2-1, Vue scoped 组件内 .field input 等
+ * 后代选择器经 [data-v-xxx] 加成会变 0-3-1 高于这里 — 子组件内若给 input 加
+ * padding-right 会覆盖此处的 36px 让 toggle 按钮被遮。新增 scoped 规则前先确认。
+ */
+.input-with-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-with-toggle > input {
+  flex: 1;
+  padding-right: 36px;
+}
+.input-with-toggle .toggle-show-btn {
+  position: absolute;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--color-muted);
+  transition: background 150ms, color 150ms;
+}
+.input-with-toggle .toggle-show-btn:hover {
+  background: var(--color-bubble-surface-hover);
+  color: var(--color-bubble-text);
+}
+.input-with-toggle .toggle-show-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+.input-with-toggle .toggle-show-btn:disabled {
+  opacity: 0;
+  pointer-events: none;
+}

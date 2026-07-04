@@ -1,0 +1,44 @@
+id: listen_attentive
+display_name_zh: 专注倾听
+duration: 3.5
+loop: true
+fps: 30
+tags: [listening, calm]
+description: 头微前倾 + 眨眼 + 轻微点头，专注听对话
+emotions: [neutral]
+contexts: [user_typing, listening]
+intensity: light
+required_semantics: [head_pitch]
+recommended_semantics: [eye_left_open, eye_right_open]
+tracks:
+  - semantic: head_pitch
+    importance: 1.0
+    easing: ease-in-out
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: -3 }
+      - { t: 2.0, v: -4 }
+      - { t: 3.0, v: -2 }
+      - { t: 3.5, v: 0 }
+  - semantic: eye_left_open
+    importance: 0.5
+    easing: stepped
+    keyframes:
+      - { t: 0,   v: 1 }
+      - { t: 1.5, v: 0 }
+      - { t: 1.7, v: 1 }
+      - { t: 3.5, v: 1 }
+  - semantic: eye_right_open
+    importance: 0.5
+    easing: stepped
+    keyframes:
+      - { t: 0,   v: 1 }
+      - { t: 1.5, v: 0 }
+      - { t: 1.7, v: 1 }
+      - { t: 3.5, v: 1 }
+  - semantic: brow_form
+    importance: 0.3
+    keyframes:
+      - { t: 0,   v: 0 }
+      - { t: 1.0, v: 0.3 }
+      - { t: 3.5, v: 0 }
