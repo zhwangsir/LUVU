@@ -1,7 +1,7 @@
 {
   "name": "luvu-workspace",
   "private": true,
-  "version": "0.21.0",
+  "version": "0.22.0",
   "type": "module",
   "description": "LUVU — Electron + Vue 3 硅基生命容器(Live2D + 本地 LLM + RVC + ComfyUI 创造 + 主体性)",
   "scripts": {

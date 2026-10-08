@@ -16,17 +16,19 @@
 import { onMounted, onBeforeUnmount, ref, watch } from 'vue'
 import { Live2DRenderer } from '../render/live2d-renderer'
 import { AlphaSampler } from '../interaction/alpha-hit'
-import type { InstanceLayout } from '../layout'
+import type { InstanceLayout, InstanceVisualState } from '../layout'
 import { useConfigStore } from '../../infra/stores/config'
 import { bus } from '../../infra/eventbus'
 
 const props = defineProps<{
   /** M8 character id */
   characterId: string
-  /** 是否 active — Q3 将驱动视觉降级(scale/opacity/saturate) */
+  /** 是否 active — Q3 已接线:驱动视觉降级 + Stage 只装配 active 的 WindowInteraction */
   isActive: boolean
   /** 舞台 slot 布局(Q2 横排)。N=1 时为填满整舞台,行为与 Q1 等价 */
   layoutHint: InstanceLayout
+  /** Q3 视觉强调(active 满强度 / 非 active 缩小后退),由 Stage 按 computeVisualState 算好传入 */
+  visualState: InstanceVisualState
   /**
    * Q2:非 active instance 加载「自己角色」的模型(来自 Character.live2d_model_dir)。
    * active instance 不传 → 走原 cfg.soul 路径(逐字不变,N=1 安全)。
@@ -52,6 +54,20 @@ const currentIntensity = ref(0.5)
 
 let renderer: Live2DRenderer | null = null
 let sampler: AlphaSampler | null = null
+/**
+ * A1(Q4 前置):初次 mount 的 ready 由 onMounted 统一上报;此后每次 active 路径
+ * 模型(重)载完成需 re-emit,让 Stage 在 active 热切换后重新装配 WindowInteraction
+ * (否则 activeRenderer 一直指向换下去的旧 instance,plan-executor / 命中检测都打错人)。
+ */
+let initialReadySent = false
+
+/** active 路径模型(重)载完成后上报 Stage;非 active / 首次 mount 前不发。 */
+function reemitReadyForStage(): void {
+  if (props.modelDir) return // 非 active 路径(Stage 只装配 active)
+  if (!renderer || !sampler) return
+  if (!initialReadySent) return // 首次由 onMounted 统一发(sampler 也还没建)
+  emit('ready', { characterId: props.characterId, renderer, sampler })
+}
 /** v0.17: 在 onMounted 内注册的 bus.on 清理列表 — onBeforeUnmount 统一调用，防 listener 泄漏 */
 const cleanupHandlers: Array<() => void> = []
 /** Q1: 窗口 resize 监听句柄 — 搬进 instance 后补 onBeforeUnmount 清理(原 Stage 漏清,见 commit 说明) */
@@ -69,6 +85,7 @@ onMounted(async () => {
 
   // RFC §3.4: 上报 sampler/renderer 给父级 Live2DStage 装配窗口级 WindowInteraction
   emit('ready', { characterId: props.characterId, renderer, sampler })
+  initialReadySent = true
   // v0.21：初次广播头部锚点（延迟一次等 model bounds 稳定）→ 气泡跟随头顶
   emitHeadPos()
   setTimeout(emitHeadPos, 250)
@@ -400,6 +417,8 @@ async function pickAndLoad(): Promise<void> {
     }
     await renderer.loadModel(found.file_url, { scale: userHint, offsetX, offsetY })
     status.value = 'ready'
+    // A1:active 热切换 / reload 后重报 Stage(重连 WindowInteraction 到当前 active)
+    reemitReadyForStage()
     bus.emit('avatar:model-loaded', {
       model_path: found.absolute_path,
       cubism: found.cubism,
@@ -473,8 +492,13 @@ onBeforeUnmount(() => {
     class="live2d-instance"
     :data-state="status"
     :data-emotion="currentEmotion"
+    :data-active="isActive ? 'true' : 'false'"
+    :data-character-id="characterId"
     :style="{
       '--emotion-intensity': currentIntensity,
+      '--visual-scale': visualState.scale,
+      '--visual-opacity': visualState.opacity,
+      '--visual-saturate': visualState.saturate,
       left: layoutHint.leftPercent + '%',
       width: layoutHint.widthPercent + '%',
       top: layoutHint.topPercent + '%',
@@ -508,6 +532,13 @@ onBeforeUnmount(() => {
   pointer-events: none;
   /* v0.15 A3: 整体呼吸 — transform-origin: bottom 让脚下不动头/胸前后微浮 */
   transform-origin: 50% 90%;
+  /* Q3: 非 active 视觉降级走 CSS 变量(呼吸 keyframes 乘 --visual-scale;
+     animation: none 时如 loading 态由本条 base transform 兜底)。切换 active 平滑过渡。 */
+  transform: scale(var(--visual-scale, 1));
+  opacity: var(--visual-opacity, 1);
+  transition:
+    transform var(--duration-normal) var(--ease-in-out),
+    opacity var(--duration-normal) var(--ease-in-out);
   animation: stage-breath 2.4s var(--ease-in-out) infinite;
 }
 /* 不同 emotion 不同呼吸节奏 + 振幅 — 用 emotion-intensity 0-1 调强度 */
@@ -531,9 +562,9 @@ onBeforeUnmount(() => {
   animation-duration: 4.0s; /* 困了呼吸最慢 */
 }
 @keyframes stage-breath {
-  /* scale 振幅基础 0.6% × intensity */
-  0%, 100% { transform: scale(calc(1 - var(--emotion-intensity, 0.5) * 0.006)); }
-  50% { transform: scale(calc(1 + var(--emotion-intensity, 0.5) * 0.006)); }
+  /* scale 振幅基础 0.6% × intensity,Q3 乘 --visual-scale 让非 active 整体缩小 */
+  0%, 100% { transform: scale(calc(var(--visual-scale, 1) * (1 - var(--emotion-intensity, 0.5) * 0.006))); }
+  50% { transform: scale(calc(var(--visual-scale, 1) * (1 + var(--emotion-intensity, 0.5) * 0.006))); }
 }
 .live2d-instance[data-state='loading'] {
   animation: none; /* loading 时不呼吸 */
@@ -549,9 +580,12 @@ onBeforeUnmount(() => {
   /* v0.15 A2: loading 时 canvas 整体淡出 */
   transition: opacity var(--duration-normal) var(--ease-in-out);
   /* v0.17：立绘 drop-shadow — 让她"贴"在桌面而不是漂浮 panel 里。
-     filter: drop-shadow 比 box-shadow 强 — 跟随 alpha 形状（非矩形），真正像影子。 */
+     filter: drop-shadow 比 box-shadow 强 — 跟随 alpha 形状（非矩形），真正像影子。
+     Q3: 叠 saturate(var) 让非 active 降饱和(变量由 inline style 注入)。 */
   filter: drop-shadow(0 12px 24px oklch(0% 0 0 / 0.28))
-          drop-shadow(0 4px 8px oklch(0% 0 0 / 0.18));
+          drop-shadow(0 4px 8px oklch(0% 0 0 / 0.18))
+          saturate(var(--visual-saturate, 1));
+  transition: filter var(--duration-normal) var(--ease-in-out);
 }
 .live2d-instance[data-state='loading'] .live2d-canvas {
   opacity: 0.3;

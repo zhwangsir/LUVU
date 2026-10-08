@@ -42,7 +42,14 @@ async function refreshResources(): Promise<void> {
       const pick = checkpoints.value.find((c) => /ghost|anime|noobai|animagine|pony/i.test(c)) ?? checkpoints.value[0]
       t2iForm.value.checkpoint = pick!
       i2iForm.value.checkpoint = pick!
-      i2vForm.value.checkpoint = pick!
+    }
+    // i2v 必须用视频 checkpoint(Wan AIO 等)— 不能复用 t2i 的图像模型挑选,否则
+    // 默认值就是一个跑不了视频的 SD checkpoint(2026-10-09 批 B 真机诊断发现)
+    if (!i2vForm.value.checkpoint && checkpoints.value.length > 0) {
+      const videoPick =
+        checkpoints.value.find((c) => /wan.*i2v|wan.*aio|fusionx.*video|rapid.*aio/i.test(c)) ??
+        checkpoints.value.find((c) => /wan|hunyuan|ltx|video/i.test(c))
+      if (videoPick) i2vForm.value.checkpoint = videoPick
     }
     if (!t2iForm.value.sampler && samplers.value.length > 0) {
       const s = samplers.value.find((x) => x === 'euler_ancestral') ?? samplers.value[0]
@@ -76,7 +83,9 @@ const i2iForm = ref({
   sampler: '', scheduler: '', seed: -1,
 })
 const t2vForm = ref({
-  prompt: '', model: '', seed: -1, promptExtend: true, watermark: false,
+  prompt: '', negativePrompt: '', model: '',
+  resolution: '720P', ratio: '16:9', duration: 5,
+  seed: -1, promptExtend: true, watermark: false,
 })
 const i2vForm = ref({
   prompt: '', negative: '', checkpoint: '',
@@ -166,6 +175,7 @@ async function runI2I(): Promise<void> {
 async function runT2V(): Promise<void> {
   if (!t2vForm.value.prompt.trim()) return alert('prompt 不能为空')
   if (!t2vForm.value.model) return alert('选一个视频模型')
+  if (t2vForm.value.duration < 2 || t2vForm.value.duration > 15) return alert('时长需在 2-15 秒(Wan2 API 限制)')
   running.value = true
   progressMsg.value = '提交中…文生视频较慢，预计 1-3 分钟'
   try {
@@ -341,6 +351,8 @@ onMounted(() => {
     <section v-show="tab === 't2v'" class="form">
       <label>Prompt（视频描述）</label>
       <textarea v-model="t2vForm.prompt" rows="4" placeholder="一只白色小猫在草地上奔跑，阳光明媚..." />
+      <label>Negative（负向描述，可选）</label>
+      <textarea v-model="t2vForm.negativePrompt" rows="2" />
       <div class="row">
         <div class="col"><label>视频模型 (Wan2 API)</label>
           <select v-model="t2vForm.model">
@@ -348,6 +360,24 @@ onMounted(() => {
             <option v-if="videoModels.length === 0" disabled>未发现 — 需 ComfyUI 装 Wan2 节点</option>
           </select>
         </div>
+        <div class="col"><label>分辨率</label>
+          <select v-model="t2vForm.resolution">
+            <option value="720P">720P</option>
+            <option value="1080P">1080P</option>
+          </select>
+        </div>
+        <div class="col"><label>比例</label>
+          <select v-model="t2vForm.ratio">
+            <option value="16:9">16:9</option>
+            <option value="9:16">9:16</option>
+            <option value="1:1">1:1</option>
+            <option value="4:3">4:3</option>
+            <option value="3:4">3:4</option>
+          </select>
+        </div>
+        <div class="col"><label>时长 (秒, 2-15)</label><input type="number" v-model.number="t2vForm.duration" min="2" max="15" step="1" /></div>
+      </div>
+      <div class="row">
         <div class="col"><label>Seed</label><input type="number" v-model.number="t2vForm.seed" /></div>
         <div class="col"><label>Prompt Extend</label>
           <input type="checkbox" v-model="t2vForm.promptExtend" />

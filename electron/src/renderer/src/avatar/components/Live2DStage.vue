@@ -1,15 +1,19 @@
 <script setup lang="ts">
 /**
- * Live2DStage — 立绘舞台「协调器」(RFC 0002 Round Q1 + Q2)。
+ * Live2DStage — 立绘舞台「协调器」(RFC 0002 Round Q1 + Q2 + Q3)。
  *
  * Q1:渲染逻辑下沉到 Live2DInstance,Stage 持窗口级 WindowInteraction。
  * Q2:v-for(character.mounted)多实例横排。
  *   - N=1(典型):单 instance 填满舞台,active,走 cfg.soul 路径 → 与 Q1 逐字等价
  *   - N>1:active 走 cfg.soul,非 active 传 modelDir 加载自己角色模型;横排等分
+ * Q3:非 active 视觉后退(computeVisualState → visualState prop,CSS 变量驱动)。
+ *
+ * A1(active 热切换正确性,原 Q4 前置):watch character.active → 清 activeRenderer
+ * 与 WindowInteraction;新 active instance 模型载完 re-emit('ready')后重连。
+ * 剩余 deferred:非 active 的 hit-test 路由(first-hit-wins)。
  *
  * WindowInteraction 是 Electron BrowserWindow 级单例(setIgnoreMouseEvents 整窗生效,
  * 不可 per-character 拆,RFC §3.4)→ 只接 active instance 的 sampler。
- * 非 active 的 hit-test 路由(first-hit-wins)留 Q4。
  *
  * 容器 class 必须保留 `live2d-stage` — window-interaction.ts isOverUiElement()
  * 靠它判定"非 UI 区"放行穿透(见该文件 line 130)。
@@ -20,7 +24,7 @@ import type { AlphaSampler } from '../interaction/alpha-hit'
 import type { BehaviorPlan } from '@shared/attention'
 import { WindowInteraction } from '../interaction/window-interaction'
 import { executePlan } from '../plan-executor'
-import { computeInstanceLayout } from '../layout'
+import { computeInstanceLayout, computeVisualState } from '../layout'
 import { useCharacterStore } from '../../infra/stores/character'
 import { bus } from '../../infra/eventbus'
 import type { Character } from '@shared/character'
@@ -41,9 +45,10 @@ let interaction: WindowInteraction | null = null
  *
  * N=1 当前安全:Vue 父先于子 unmount,Stage.onBeforeUnmount 先把它置 null,
  * 之后 Live2DInstance 才 destroy renderer,onExecutePlan 的 `!activeRenderer` guard 拦住。
- * ⚠️ Q4 前置(reviewer Q-MEDIUM):active hot-swap(切角色不 unmount Stage)时,旧
- * instance destroy 到新 instance ready 之间有窗口期,activeRenderer 指向已销毁 renderer。
- * Q4 实施时须在 character.active 变化时(watch)清 activeRenderer=null 关掉这个窗口。
+ *
+ * A1(原 reviewer Q-MEDIUM,已修):active 热切换(切角色不 unmount Stage)时,
+ * 下方 watch 立即清 activeRenderer=null + 销毁 WindowInteraction,关掉「指向已销毁/
+ * 已换下 renderer」的窗口;新 active instance 模型载完 re-emit('ready')重连。
  */
 let activeRenderer: Live2DRenderer | null = null
 
@@ -107,6 +112,21 @@ watch(passthrough, (on) => {
   interaction?.forceInteractive(!on)
 })
 
+/**
+ * A1:active 热切换(切角色不 unmount Stage,instance 只是原地换模型)时,
+ * 旧 activeRenderer / WindowInteraction 属于换下去的 instance — 立即清引用,
+ * plan-executor 的 `!activeRenderer` guard 拦住窗口期内的 plan;
+ * 新 active instance 模型载完 re-emit('ready')→ onInstanceReady 重连。
+ */
+watch(
+  () => character.active?.id ?? null,
+  () => {
+    activeRenderer = null
+    interaction?.destroy()
+    interaction = null
+  },
+)
+
 onBeforeUnmount(() => {
   bus.off('attention:execute-plan', onExecutePlan)
   interaction?.destroy()
@@ -123,6 +143,7 @@ onBeforeUnmount(() => {
       :character-id="c.id"
       :is-active="isActiveChar(c)"
       :layout-hint="computeInstanceLayout(renderList.length, i)"
+      :visual-state="computeVisualState(isActiveChar(c), renderList.length > 1)"
       :model-dir="isActiveChar(c) ? undefined : c.live2d_model_dir"
       :model-file="isActiveChar(c) ? undefined : c.live2d_model_file"
       @ready="onInstanceReady"

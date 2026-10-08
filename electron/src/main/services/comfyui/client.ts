@@ -234,7 +234,15 @@ export class ComfyClient {
         const status = (hist.status ?? {}) as { completed?: boolean; status_str?: string }
         if (status.completed) {
           onProgress?.('done')
-          return { promptId, images: extractImages(hist, this), rawHistory: hist }
+          const images = extractImages(hist, this)
+          // v0.22 批 B:完成但 0 输出不再静默返回空数组(renderer 此前只显示「完成 ✓ 0 段」)。
+          // 把 status_str / 各输出节点的键 / execution_error 明细带进错误信息,给出可行动的失败原因。
+          if (images.length === 0) {
+            throw new ComfyError(
+              `ComfyUI 任务完成但没有输出文件 prompt_id=${promptId} status_str=${status.status_str ?? '?'} — ${summarizeHistory(hist)}`,
+            )
+          }
+          return { promptId, images, rawHistory: hist }
         }
       }
       if (!announcedRunning) {
@@ -296,6 +304,30 @@ function extractImages(history: Record<string, unknown>, client: ComfyClient): C
     }
   }
   return all
+}
+
+/**
+ * v0.22 批 B:把 history 压成一行诊断串 — 输出节点各自的键 + execution_error 明细。
+ * 注:新版 ComfyUI 的 SaveVideo 走 PreviewVideo,输出同样落在 images 键(源码
+ * comfy_api/latest/_ui.py PreviewVideo.get_data 实证),所以 extractImages 只认 images 是对的;
+ * 若 0 输出,通常是节点执行失败,这函数负责把原因带出来。
+ */
+function summarizeHistory(history: Record<string, unknown>): string {
+  const outputs = (history.outputs ?? {}) as Record<string, Record<string, unknown>>
+  const nodeKeys = Object.entries(outputs)
+    .map(([id, out]) => `${id}:[${Object.keys(out ?? {}).join(',')}]`)
+    .join(' ')
+  const messages = ((history.status as { messages?: unknown[] } | undefined)?.messages ?? []) as
+    | Array<[string, Record<string, unknown>]>
+  const errors = messages
+    .filter((m) => Array.isArray(m) && m[0] === 'execution_error')
+    .map((m) => {
+      const d = m[1] ?? {}
+      const nodeType = d.node_type ?? d.node_id ?? '?'
+      const msg = d.exception_message ?? JSON.stringify(d)
+      return `${nodeType}: ${String(msg).slice(0, 300)}`
+    })
+  return `outputs{${nodeKeys || '空'}} errors[${errors.length > 0 ? errors.join(' | ') : '无'}]`
 }
 
 function sleep(ms: number): Promise<void> {

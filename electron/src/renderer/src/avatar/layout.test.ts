@@ -4,7 +4,7 @@
  * 重点:count<=1 必须返回填满整舞台(保证 N=1 行为与 Q1 等价)。
  */
 import { describe, expect, it } from 'vitest'
-import { computeInstanceLayout } from './layout'
+import { VISUAL_STATE_IDLE, computeInstanceLayout, computeVisualState } from './layout'
 
 describe('computeInstanceLayout', () => {
   it('count=1 → 填满整舞台(N=1 等价 inset:0)', () => {
@@ -83,5 +83,32 @@ describe('computeInstanceLayout', () => {
       const next = computeInstanceLayout(count, i + 1)
       expect(next.leftPercent).toBeCloseTo(cur.leftPercent + cur.widthPercent)
     }
+  })
+})
+
+describe('computeVisualState(Q3 视觉强调)', () => {
+  it('active → 满强度(scale/opacity/saturate 全 1)', () => {
+    expect(computeVisualState(true, true)).toEqual({ scale: 1, opacity: 1, saturate: 1 })
+    expect(computeVisualState(true, false)).toEqual({ scale: 1, opacity: 1, saturate: 1 })
+  })
+
+  it('非 active + 多灵魂同框 → 后退档(scale<1 且变暗降饱和)', () => {
+    const idle = computeVisualState(false, true)
+    expect(idle.scale).toBeLessThan(1)
+    expect(idle.opacity).toBeLessThan(1)
+    expect(idle.saturate).toBeLessThan(1)
+    expect(idle).toEqual(VISUAL_STATE_IDLE)
+  })
+
+  it('非 active + 单灵魂(N=1)→ 满强度(与 Q1 行为等价)', () => {
+    expect(computeVisualState(false, false)).toEqual({ scale: 1, opacity: 1, saturate: 1 })
+  })
+
+  it('后退档数值合理(scale 0.5~0.9,opacity/saturate 不为 0)', () => {
+    const idle = computeVisualState(false, true)
+    expect(idle.scale).toBeGreaterThanOrEqual(0.5)
+    expect(idle.scale).toBeLessThanOrEqual(0.9)
+    expect(idle.opacity).toBeGreaterThan(0)
+    expect(idle.saturate).toBeGreaterThan(0)
   })
 })

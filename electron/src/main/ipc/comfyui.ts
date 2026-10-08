@@ -167,10 +167,13 @@ export function registerComfyuiIpc(getWindow: () => BrowserWindow | null): void 
         string,
         { input?: { required?: Record<string, unknown> } }
       >
-      const enumList = (info.Wan2TextToVideoApi?.input?.required?.model as unknown[])?.[0] as
-        | string[]
-        | undefined
-      return { ok: true, items: enumList ?? [] }
+      // model 是 COMFY_DYNAMICCOMBO_V3:model = ["COMFY_DYNAMICCOMBO_V3", { options: [{key, inputs}] }]
+      // 之前读 model[0] 拿到的是类型名字符串,枚举永远为空 → UI 显示「未发现」
+      const modelSpec = info.Wan2TextToVideoApi?.input?.required?.model
+      const options = Array.isArray(modelSpec)
+        ? ((modelSpec[1] as { options?: Array<{ key: string }> } | undefined)?.options ?? [])
+        : []
+      return { ok: true, items: options.map((o) => o.key) }
     } catch (e) {
       return { ok: false, items: [], error: e instanceof Error ? e.message : String(e) }
     }

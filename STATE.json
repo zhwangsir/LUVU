@@ -1,6 +1,7 @@
 {
   "project": "LUVU",
-  "updated_at": "2026-08-27T02:10:00+08:00",
+  "updated_at": "2026-10-09T08:30:00+08:00",
+  "version": "0.22.0",
   "docs": {
     "canonical": [
       "README.md",
@@ -16,6 +17,13 @@
     "docs_normalized": {
       "status": "done",
       "verified_at": "2026-08-27T02:10:00+08:00"
+    },
+    "m8_closeout": {
+      "status": "done",
+      "verified_at": "2026-10-09T08:30:00+08:00",
+      "scope": "同框 GUI(Q2 多实例 + Q3 视觉强调 + A1 active 热切换)+ i2v 真机端到端跑通 + t2v DynamicCombo 格式修复(执行需 ComfyUI 登录)",
+      "deferred": "非 active hit-test 路由(first-hit-wins);本地推理 t2v workflow",
+      "release": "v0.22.0 = 第一个 GitHub Release,待打 tag"
     }
   }
 }

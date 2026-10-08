@@ -58,8 +58,15 @@ export interface I2IGenParams extends ImageGenParams {
 
 export interface VideoT2VParams {
   prompt: string
-  /** Wan2 API 模型名（从 model 参数 enum 里挑） */
+  negativePrompt?: string
+  /** Wan2 API 模型 key(Wan2TextToVideoApi 的 DynamicCombo 选项 key,如 wan2.7-t2v) */
   model: string
+  /** 分辨率档(API 节点枚举:720P / 1080P) */
+  resolution?: string
+  /** 画面比例(API 节点枚举:16:9 / 9:16 / 1:1 / 4:3 / 3:4) */
+  ratio?: string
+  /** 时长秒数(API 节点限制 2-15) */
+  duration?: number
   seed?: number
   promptExtend?: boolean
   watermark?: boolean
@@ -202,27 +209,33 @@ export function buildI2IWorkflow(p: I2IGenParams): Record<string, unknown> {
 
 /**
  * 使用 ComfyUI 内置 Wan2TextToVideoApi 节点（API 封装，由 ComfyUI 后端代理 Wan2 服务）
- * 输入很简单：model（动态枚举）+ seed + 标志
- * prompt 通过 CLIPTextEncode 接入（看节点约定）
  *
- * 注：如果用户想本地推理 Wan/Hunyuan T2V，需要单独的 checkpoint 节点链路；
- *     这里默认用 API 节点，简单可靠。
+ * ⚠️ model 是 COMFY_DYNAMICCOMBO_V3 动态组合输入:v1 /prompt payload 必须用
+ * 「combo 选中 key + 点号嵌套子键」格式(`"model": "wan2.7-t2v"` + `"model.prompt": ...`),
+ * 只传普通顶层 prompt 会 400 required_input_missing(model.duration/resolution/ratio…)。
+ * 格式依据上游 tests-unit/execution_test/dynamic_inputs_test.py +
+ * 2026-10-09 workstation :8188 真机验证(object_info 枚举:duration 2-15 / 720P|1080P /
+ * 16:9|9:16|1:1|4:3|3:4)。
  */
 export function buildVideoT2VWorkflow(p: VideoT2VParams): Record<string, unknown> {
-  const seed = p.seed ?? randomSeed()
+  // Wan API 节点的 seed 是 INT32(0..2147483647);randomSeed()/用户 seed 可能超界 →
+  // 真机 400 value_bigger_than_max(2026-10-09 批 B 验证),这里统一钳制
+  const raw = p.seed != null && p.seed >= 0 ? p.seed : randomSeed()
+  const seed = raw % 2147483648
   const prefix = p.filenamePrefix ?? `luvu_t2v_${slug(p.prompt)}`
-  // Wan2TextToVideoApi 的 prompt 走节点 widget；按 ComfyUI 标准 wan2 用法是
-  // 把 prompt 作为 STRING 直接传给 API 节点；保险起见用 text encoder 走也行
   return {
     '1': {
       class_type: 'Wan2TextToVideoApi',
       inputs: {
         model: p.model,
+        'model.prompt': p.prompt,
+        'model.negative_prompt': p.negativePrompt ?? '',
+        'model.resolution': p.resolution ?? '720P',
+        'model.ratio': p.ratio ?? '16:9',
+        'model.duration': p.duration ?? 5,
         seed,
         prompt_extend: p.promptExtend ?? true,
         watermark: p.watermark ?? false,
-        // Wan API 节点的 prompt 是 widget 字段而不是 connection；保持兼容性放这里：
-        prompt: p.prompt,
       },
     },
     '2': {
@@ -269,7 +282,10 @@ export function buildVideoI2VWorkflow(p: VideoI2VParams): Record<string, unknown
         seed,
         steps: p.steps ?? 30,
         cfg: p.cfg ?? 6.0,
-        sampler_name: p.sampler ?? 'uni_pc',
+        // 默认 euler_ancestral(与 UI 表单默认一致):2026-10-09 workstation 真机实证,
+        // Blackwell(sm_120)+ 新 torch 栈上 uni_pc 走 cusolver 必崩(CUSOLVER_STATUS_INTERNAL_ERROR,
+        // 显存充足仍崩),euler_ancestral 同参数端到端出片
+        sampler_name: p.sampler ?? 'euler_ancestral',
         scheduler: p.scheduler ?? 'simple',
         denoise: 1.0,
         model: ['4', 0],

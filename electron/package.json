@@ -1,6 +1,6 @@
 {
   "name": "luvu-electron",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "private": true,
   "type": "module",
   "description": "LUVU v0.16 — Live2D 模型完整度工坊 (LLM motion + 8 expression + 物理预设 + 参数检测 + 健康仪表盘)",

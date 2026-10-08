@@ -1,7 +1,7 @@
 # DEVELOPMENT.md — LUVU
 
 > 合并自旧 PROJECT_INIT / docs / 根目录散文档。原文在 `ALLProject/.archive/docs-legacy-20260827/`。
-> 最后更新：2026-08-27
+> 最后更新：2026-10-09（M8 收口：同框 GUI + t2v/i2v 真机验证）
 
 # 原 PROJECT_INIT
 
@@ -14,13 +14,13 @@
 | 字段 | 值 |
 |------|----|
 | 项目名称 | LUVU（硅基生命容器 v0.21，C 端 AI 伴侣） |
-| 当前版本 | 0.21.0（workspace 根版本，Electron 同步） |
+| 当前版本 | 0.22.0（workspace 根版本，Electron 同步） |
 | 创建日期 | 2026-05（与 DRT-BOT 同源分叉，独立演进） |
 | 负责人 | zhwangsir |
 | 项目路径 | /Users/wangzhenyu/Desktop/ALLProject/LUVU |
 | 远程仓库 | （workspace 私有，见 `scripts/push-to-github.sh`） |
 | 仓库可见性 | 私有（private） |
-| 线上地址 | 暂无 release（M0-M8 已落地，未发布 GitHub Release） |
+| 线上地址 | v0.22.0 收口后打第一个 GitHub Release（M0-M8 已落地） |
 
 ## 二、项目概述与核心功能
 
@@ -50,7 +50,7 @@ LUVU 相对 DRT-BOT 的差异化扩展：
 - MCP 外部工具：手写 stdio JSON-RPC client
 - MotionFactory：LLM 生成 motion + parameter-introspector + scorer + validator + writer
 - CharacterEval：questions / runner / scorer 评估闭环
-- ComfyUI：t2i / i2i（t2v / i2v IPC 在但 workflow 未跑通）
+- ComfyUI：t2i / i2i / i2v（i2v 2026-10-09 真机端到端跑通）；t2v（Wan2TextToVideoApi 格式已修，执行需 ComfyUI 实例登录账号）
 - TTS sidecar：CosyVoice2-0.5B / F5 TTS / edge-tts / RVC 47 voice + mood-aware prosody
 - character-pack zip 导入导出 + soul-loader v0.1→v2.0 迁移 + 字段级 diff NDJSON audit log
 - 24h soul-learner 自动从 topic_imprints 写回 learned_traits.yaml
@@ -369,14 +369,17 @@ LUVU 主体为 Electron 桌面应用，**对外接口以 IPC channel 形式存�
 
 ## 八、已知问题与注意事项
 
-- **从未 release**：未发布 GitHub Release
-- **t2v / i2v workflow 未跑通**：ComfyUI IPC 在，但视频生成 workflow 未完成
+> 2026-10-09 M8 收口批更新：同框 GUI 与视频 workflow 按真机验证实情重写，测试口径见 TEST_LOG.md。
+
+- **v0.22.0 = 第一个 GitHub Release**（此前从未 release）
+- **多灵魂同框已收口（0.22）**：Q2 多实例同框（N=1 逐字等价）+ Q3 active 视觉强调（computeVisualState：非 active 缩小/变暗/降饱和）+ A1 active 热切换正确性（Stage watch 清 activeRenderer，instance 换模型后 re-emit ready 重连 WindowInteraction）。**剩余 deferred**：非 active 的 hit-test 路由（first-hit-wins）——点击非 active 灵魂交互，v0.22 不做（已有 picker 切换入口）
+- **t2v（文生视频）**：Wan2TextToVideoApi 的 COMFY_DYNAMICCOMBO_V3 格式已修（v1 payload 用「combo 选中 key + `model.*` 点号嵌套子键」；seed 钳制 INT32）——单测锁定。真机 2026-10-09 实证：格式通过校验并执行，**但 API 节点要求 ComfyUI 实例登录 Comfy 账号**（ workstation :8188 未登录，报 Unauthorized）。用户自配 endpoint 登录后即可用；本地推理 t2v 工作流留后续
+- **i2v（图生视频）真机端到端跑通（2026-10-09，workstation :8188 / RTX PRO 6000 Blackwell）**：CheckpointLoaderSimple(wan2.2-i2v-rapid-aio) + WanImageToVideo + KSampler(euler_ancestral) + SaveAnimatedWEBP 出片。⚠️ **采样器默认已锁 euler_ancestral**：uni_pc 走 cusolver 在 Blackwell(sm_120)+新 torch 栈必崩（CUSOLVER_STATUS_INTERNAL_ERROR，显存充足仍崩，三次复现），勿改回
 - **dialog 路径 LLM「我画给你看」未集成**：缺 dialog tool_use → ComfyUI tool 路径（M7 最后 20%）
-- **多灵魂同框未做**：M8 灵魂社会 partial-ship
 - **灵魂自己改自己未做**：M9 自主进化未实现
 - **7×24 后台运行未做**：M10 daemon mode 未实现
 - **Cubism 5 不支持** / **VRM 3D 不支持** / **Voice 打断 / full-duplex 无**
-- **跨平台**：macOS-first，Windows 桌宠主战场落后
+- **跨平台**：macOS-first，Windows 桌宠主战场落后（本仓库 Windows 机可全量 typecheck/test/build/e2e）
 - **TTS sidecar 首次安装需网络**：CosyVoice2-0.5B 约 1.1 GB，5-15 分钟；可用 `--minimal` 跳过
 - **TTS sidecar 国内镜像**：huggingface 失败会自动 fallback 到 modelscope
 - **better-sqlite3 native 模块**：换 Node/Electron 版本后需 `pnpm -F luvu-electron rebuild`
