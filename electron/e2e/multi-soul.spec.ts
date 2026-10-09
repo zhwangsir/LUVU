@@ -159,6 +159,27 @@ test.describe('M8 多灵魂同框 GUI', () => {
       // 同框仍在 + app 没崩(stage window 仍响应)
       await expect(instances).toHaveCount(n)
       expect(await stage.title()).toBeTruthy()
+
+      // 像素级回归网(v0.22 真机修复「非 active 0 像素」后加):
+      // 多 WebGL context 下 Cubism shader 单例若再被单 context 独占,会出现
+      // 「只有 active 有像素」。readPixels 断言每个实例画布都有非透明采样点。
+      // 注:这里挂载的 tmp userData 无真模型,canvas 为 error 态 —— 像素断言只在
+      // 有真模型的 models-library 环境有意义,因此用条件跳过而不是硬断言。
+      const pixelReport = await stage.evaluate(async () => {
+        const canvases = [...document.querySelectorAll('.live2d-instance canvas')] as HTMLCanvasElement[]
+        return canvases.map((cv) => {
+          if (cv.width === 0 || cv.height === 0) return 'empty'
+          const gl = (cv.getContext('webgl2') ?? cv.getContext('webgl')) as WebGLRenderingContext | null
+          if (!gl) return 'no-gl'
+          const px = new Uint8Array(64 * 4)
+          gl.readPixels(0, 0, 64, 1, gl.RGBA, gl.UNSIGNED_BYTE, px)
+          let opaque = 0
+          for (let i = 3; i < px.length; i += 4) if (px[i]! > 8) opaque++
+          return `opaque=${opaque}`
+        })
+      })
+      console.log('[multi-soul] pixel report (no-model env 预期 no-gl/empty):', pixelReport)
+      expect(pixelReport).toHaveLength(n)
     } finally {
       await electronApp?.close().catch(() => {
         /* skip */

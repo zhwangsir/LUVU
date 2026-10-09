@@ -13,6 +13,7 @@
 import * as PIXI from 'pixi.js'
 import { Live2DModel } from 'pixi-live2d-display/cubism4'
 import type { ExtLive2DModel } from './live2d-types'
+import { bindCubismContext } from './cubism-multi-context'
 
 Live2DModel.registerTicker(PIXI.Ticker)
 
@@ -57,6 +58,11 @@ export class Live2DRenderer {
     })
     // 让我们的参数覆盖（嘴型）在 model.update 之后跑：用 LOW 优先级
     this.app.ticker.add(this.tick, this, PIXI.UPDATE_PRIORITY.LOW)
+    // Q2 多实例修复:渲染前把 Cubism shader 单例切到本 app 的 context
+    // (根因见 cubism-multi-context.ts 头注释;不修则只有最后加载的实例有像素)
+    this.app.renderer.on('prerender', () =>
+      bindCubismContext(this.app.renderer as unknown as { gl: WebGLRenderingContext }),
+    )
   }
 
   async loadModel(modelUrl: string, opts: ModelOptions = {}): Promise<void> {

@@ -3,6 +3,11 @@
 > 最后更新：2026-10-09
 
 - 2026-08-27 项目管家文档治理：项目根目录收敛为 5 件套，旧文档归档。
+- 2026-10-09 **多灵魂同框「非 active 0 像素」修复（c537e1a 之后的补丁，待 commit）**：
+  - 现象：真机验证（models-library 碧蓝航线 40 模型入库后，Playwright 真 IPC 建 3 角色 mount）发现三个实例 data-state 全 ready，但**只有 active 有像素**，非 active 画布 0 像素；切 active 后旧 active 从画面消失
+  - 定位：renderer console 刷 `WebGL INVALID_OPERATION: bindTexture/bindBuffer/drawElements`；最小复现实验（3 个 PIXI.Application 各载一模型 → 只有最后加载的有像素；单 Application 多模型正常）锁定根因 = **pixi-live2d-display 的 CubismShader_WebGL 模块级单例只在模型加载时 setGl，逐帧 draw 不重指**，多 WebGL context 下单例被最后加载者独占
+  - 修复：`avatar/render/cubism-multi-context.ts` —— 每 app renderer prerender 时按 WeakMap 缓存把「每 context 一份 _shaderSets」换进单例（零重编译）；`CubismShader_WebGL` 在 ES 构建有导出，**未改库文件**；类型 shim `renderer/src/types/pixi-live2d-display-cubism4.d.ts`
+  - 验证：重建后同框 3 灵魂全部渲染（截图 `Z:\PC\new model\verify-screenshots\`，Q3 视觉档位正常）；新增 swapShaderContext 单测 5 例；全量回归 typecheck ✓ / 688 单测 ✓ / e2e 3 ✓（multi-soul e2e 加了像素报告输出）
 - 2026-10-09 **M8 收口批（v0.22.0）**，全量验证在 Windows 工作机（Node 24.20）：
 
   **单测（vitest）**
